@@ -24,12 +24,16 @@ for _ in range(tests):
     n = inp()
     a = input_list()
     b = input_list()
-    ret = n
-    dica = {}
-    monostk = []
-    for i, num in enumerate(a):
-        
-        dica[num] = i
-    for i, num in enumerate(b):
-        ret = min(ret, i+dica[num-1])
+    pos = {}
+    for p, num in enumerate(a):
+        pos[num] = p
+    for p, num in enumerate(b):
+        pos[num] = p
+    l, ret = n, n
+    for num in range(2*n, 0, -1):
+        if num%2:
+            ret = min(ret, pos[num]+l)
+        else:
+            l = min(l, pos[num])
+            
     print(ret)
